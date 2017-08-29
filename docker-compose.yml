@@ -1,0 +1,31 @@
+version: "3"
+services:
+
+  servicenow-db:
+    image: mysql:5.6
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=sn
+      - MYSQL_PASSWORD=mypass
+      - MYSQL_DATABASE=sample_16000
+    healthcheck:
+      test: "mysql -u$$MYSQL_USER -p$$MYSQL_PASSWORD -D sample_16000 -e ';'" 
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  servicenow:
+    build: .
+    image: servicenow
+    ports:
+      - "1600:16000"
+    links:
+      - "servicenow-db:db"
+    depends_on:
+      - servicenow-db
+    environment:
+      - URL=http://example.com
+      - DB_ENV_MYSQL_USER=sn
+      - DB_ENV_MYSQL_PASSWORD=mypass
+      - DB_PORT_3306_TCP_ADDR=db
+      - DB_PORT_3306_TCP_PORT=3306

@@ -6,6 +6,6 @@ To build:
 
     docker build -t servicenow .
     
-Before running it, you can create a mySQL container (not explained here) and link it to ServiceNow
+A sample docker-compose file is included. To run:
 
-    docker run -d --security-opt seccomp:unconfined --name servicenow -p 1600:16000 --link servicenow-db:db servicenow
+    docker-compose up -d
