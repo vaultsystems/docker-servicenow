@@ -1,4 +1,4 @@
-Place the servicenow application zip file here, e.g.
+Place the servicenow application zip file in this directory, e.g.
 
     glide-helsinki-03-16-2016__patch0-hotfix1-05-16-2016_05-16-2016_1044.zip
 
